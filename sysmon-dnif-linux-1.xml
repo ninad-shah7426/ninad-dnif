@@ -1,0 +1,110 @@
+<Sysmon schemaversion="4.70">
+  <EventFiltering>
+    <!-- Event ID 1 == ProcessCreate. Log all newly created processes -->
+    <RuleGroup name="ProcessCreate" groupRelation="or">
+      <ProcessCreate onmatch="exclude">
+        <!-- Exclude common system services -->
+        <Image condition="is">/usr/bin/systemd</Image> <!-- Systemd, the core system and service manager -->
+        <Image condition="is">/usr/sbin/cron</Image> <!-- Cron daemon, scheduling tasks -->
+        <Image condition="is">/usr/sbin/sshd</Image> <!-- SSH daemon, for secure remote logins -->
+        <Image condition="is">/bin/bash</Image> <!-- Bash shell, often used in scripts or interactive use -->
+        <Image condition="is">/usr/bin/dbus-daemon</Image> <!-- D-Bus, the message bus system -->
+        <Image condition="is">/usr/sbin/rsyslogd</Image> <!-- System logging daemon -->
+        <Image condition="is">/lib/systemd/systemd-networkd</Image> <!-- Network management -->
+        <Image condition="is">/lib/systemd/systemd-udevd</Image> <!-- Device manager daemon -->
+        <Image condition="is">/usr/sbin/ntpd</Image> <!-- Network Time Protocol daemon -->
+        <Image condition="is">/usr/lib/policykit-1/polkitd</Image> <!-- PolicyKit, managing system-wide policies -->
+        <Image condition="is">/usr/sbin/atd</Image> <!-- At job scheduler daemon -->
+    </ProcessCreate>
+      
+    </RuleGroup>
+    <!-- Event ID 3 == NetworkConnect Detected. Log all network connections -->
+    <RuleGroup name="NetworkConnect" groupRelation="or">
+      <!-- Exclude benign or common system connections -->
+      <NetworkConnect onmatch="exclude">
+        <!-- Exclude connections to localhost (127.0.0.1) -->
+        <DestinationIp condition="is">127.0.0.1</DestinationIp> <!-- Localhost connections -->
+        
+        <!-- Exclude common system services that might establish network connections -->
+        <Image condition="is">/usr/sbin/cron</Image> <!-- Cron daemon, scheduling tasks -->
+        <Image condition="is">/usr/sbin/rsyslogd</Image> <!-- System logging daemon -->
+        <Image condition="is">/usr/bin/dbus-daemon</Image> <!-- D-Bus message bus system -->
+        <Image condition="is">/usr/sbin/ntpd</Image> <!-- Network Time Protocol daemon -->
+        <Image condition="is">/lib/systemd/systemd-networkd</Image> <!-- Network management service -->
+
+        <!-- Exclude termination of known user applications or common processes -->
+        <Image condition="contains">/usr/bin/firefox</Image> <!-- Firefox browser -->
+        <Image condition="contains">/usr/bin/chrome</Image> <!-- Chrome browser -->
+        <!-- Exclude termination of known user applications or common processes -->
+        <Image condition="contains">/usr/lib/firefox</Image> <!-- Firefox browser -->
+        <Image condition="contains">/usr/lib/chrome</Image> <!-- Chrome browser -->
+ 
+        
+        <!-- Exclude connections on commonly used internal services -->
+        <DestinationIp condition="begin with">10.</DestinationIp> <!-- Private network (Class A) -->
+        <DestinationIp condition="begin with">172.</DestinationIp> <!-- Private network (Class B) -->
+        <DestinationIp condition="begin with">192.</DestinationIp> <!-- Private network (Class C) -->
+        
+      </NetworkConnect>
+    </RuleGroup>
+    <!-- Event ID 5 == ProcessTerminate. Log all processes terminated -->
+    <RuleGroup name="ProcessTerminate" groupRelation="or">
+    <!-- Exclude benign or common system process terminations -->
+    <ProcessTerminate onmatch="exclude">
+        <!-- Exclude termination of common system daemons -->
+        <Image condition="is">/usr/sbin/systemd</Image> <!-- System service manager -->
+        <Image condition="is">/usr/sbin/sshd</Image> <!-- SSH daemon -->
+        <Image condition="is">/usr/sbin/cron</Image> <!-- Cron daemon -->
+        <Image condition="is">/usr/sbin/rsyslogd</Image> <!-- Syslog daemon -->
+        <Image condition="is">/usr/sbin/ntpd</Image> <!-- NTP daemon -->
+        <Image condition="is">/lib/systemd/systemd-logind</Image> <!-- User login service -->
+        <Image condition="is">/lib/systemd/systemd-journald</Image> <!-- System journaling service -->
+        <Image condition="is">/lib/systemd/systemd-networkd</Image> <!-- Network management service -->
+        <Image condition="is">/usr/bin/dbus-daemon</Image> <!-- D-Bus message bus daemon -->
+        
+        
+        <!-- Exclude termination during shutdown or reboot -->
+        <Image condition="is">/sbin/reboot</Image> <!-- Reboot command -->
+        <Image condition="is">/sbin/shutdown</Image> <!-- Shutdown command -->
+    </ProcessTerminate>
+    </RuleGroup>
+    
+    <!-- Event ID 9 == RawAccessRead. Log all raw access read -->
+    <RuleGroup name="RawAccessRead" groupRelation="or">
+      <RawAccessRead onmatch="exclude"/>
+    </RuleGroup>
+    <!-- Event ID 10 == ProcessAccess. Log all open process operations -->
+    <RuleGroup name="ProcessAccess" groupRelation="or">
+      <ProcessAccess onmatch="exclude"/>
+    </RuleGroup>
+
+<!-- Event ID 11 == FileCreate. Log every file creation -->
+    <RuleGroup name="FileCreate" groupRelation="or">
+          <FileCreate onmatch="exclude">
+        <!-- System and daemon processes -->
+        <Image condition="is">/usr/sbin/systemd</Image> <!-- System service manager -->
+        <Image condition="is">/usr/sbin/sshd</Image> <!-- SSH daemon -->
+        <Image condition="is">/usr/bin/dbus-daemon</Image> <!-- D-Bus messaging -->
+        <Image condition="is">/lib/systemd/systemd-journald</Image> <!-- System journaling -->
+        
+        <!-- Temporary and log files (e.g., system logs) -->
+        <TargetFilename condition="contains">/var/log/</TargetFilename> <!-- System and application logs -->
+        <TargetFilename condition="contains">/var/cache/</TargetFilename> <!-- Cache files -->
+
+
+        <!-- Exclude file creation related to system maintenance tools -->
+        <Image condition="is">/usr/bin/crontab</Image> <!-- Cron job scheduling tool -->
+        <Image condition="is">/usr/bin/tmpwatch</Image> <!-- Temporary file cleanup tool -->
+    </FileCreate>    
+    </RuleGroup>
+
+    <!--Event ID 23 == FileDelete. Log all files being deleted -->
+    <RuleGroup name="FileDelete" groupRelation="or">
+      <FileDelete onmatch="exclude"/>
+      
+    </RuleGroup>
+
+
+  </EventFiltering>
+
+</Sysmon>

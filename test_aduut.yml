@@ -1,0 +1,17 @@
+connector_config:
+  log_source: "MSSQL"
+database_config:
+  query: "SELECT * FROM sys.fn_get_audit_file('F:\\Audit_Log_Test\\*.sqlaudit', DEFAULT, DEFAULT) WHERE event_time >= DATEADD(minute, -10, GETDATE())"
+  field_name: event_time  # Assuming 'event_time' is the correct field for the timestamp
+  initial_value: ""  # Leave empty if you want dynamic fetching based on time
+  connection_mode: jdbc
+  connection_string: "jdbc:sqlserver://172.31.62.11:1433;databaseName=<DATABASE>"
+  classpath: "rdbms_jar/sqljdbc42.jar"  # Adjust this path if needed
+  connection_driver: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+  user: "<username>"
+  password: "<password>"
+forwarding_config:
+  dst_ip: "<DESTINATION_IP>"
+  dst_port: "<DESTINATION_PORT>"
+  transfer_type: udp
+

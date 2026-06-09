@@ -1,0 +1,1313 @@
+>>> TEST 1: Ping
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/test/ping
+BODY     : {"apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+{
+    "pong": "2026-06-09 08:19:40Z"
+}
+
+>>> TEST 2: Key Info (quota, access groups, expiry)
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/key/info
+BODY     : {"apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+[
+    {
+        "user": "soc@pngdataco.com",
+        "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e",
+        "query_limit": "0",
+        "status": "active",
+        "access": [
+            "filters",
+            "reports"
+        ],
+        "query_count": "0",
+        "label": "pngdataco"
+    }
+]
+
+>>> TEST 3: Reports Subscribed (your lists)
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/subscribed
+BODY     : {"apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+[
+    "pngdataco"
+]
+
+>>> TEST 4: Reports Types (all report types available to you)
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/types
+BODY     : {"apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+[
+    "blocklist",
+    "compromised_website",
+    "device_id",
+    "event4_sinkhole",
+    "event4_sinkhole_dns",
+    "event4_sinkhole_http",
+    "population_http_proxy",
+    "population_isakmp",
+    "population_msmq",
+    "scan_amqp",
+    "scan_badsecrets",
+    "scan_cwmp",
+    "scan_dns",
+    "scan_epmd",
+    "scan_exchange",
+    "scan_ftp",
+    "scan_http",
+    "scan_http_proxy",
+    "scan_http_vulnerable",
+    "scan_imap",
+    "scan_ldap_tcp",
+    "scan_ldap_udp",
+    "scan_loop_dos",
+    "scan_memcached",
+    "scan_msrpc",
+    "scan_mssql",
+    "scan_mysql",
+    "scan_netbios",
+    "scan_ntp",
+    "scan_pop3",
+    "scan_portmapper",
+    "scan_postgres",
+    "scan_rdp",
+    "scan_redis",
+    "scan_rsync",
+    "scan_smb",
+    "scan_smtp",
+    "scan_snmp",
+    "scan_ssdp",
+    "scan_ssh",
+    "scan_ssl",
+    "scan_ssl_poodle",
+    "scan_stun",
+    "scan_telnet",
+    "scan_vnc"
+]
+
+>>> TEST 5: Reports Types with detail (description + URL per type)
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/types
+BODY     : {"detail": true, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+[
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/blocklist-report/",
+        "description": "Block Listed IP Addresses Results",
+        "type": "blocklist"
+    },
+    {
+        "description": "Compromised Websites",
+        "type": "compromised_website",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/compromised-website-report/"
+    },
+    {
+        "description": "Device identification based on our daily scans and scan rules",
+        "type": "device_id",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/device-identification-report/"
+    },
+    {
+        "description": "Sinkhole connections to non-HTTP sinkholes",
+        "type": "event4_sinkhole",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/sinkhole-events-report/"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/sinkhole-dns-events-report/",
+        "description": "DNS queries to our sinkhole nameservers",
+        "type": "event4_sinkhole_dns"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/sinkhole-http-events-report/",
+        "type": "event4_sinkhole_http",
+        "description": "Sinkhole connections to HTTP sinkholes"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-http-proxy-report/",
+        "description": "Accessible HTTP Proxy Scan Results",
+        "type": "population_http_proxy"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-isakmp-report/",
+        "description": "Accessible ISAKMP services seen in our scans",
+        "type": "population_isakmp"
+    },
+    {
+        "type": "population_msmq",
+        "description": "Accessible MSMQ Service Scan Results",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-msmq-service-report/"
+    },
+    {
+        "description": "Accessible AMQP Scan Results",
+        "type": "scan_amqp",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-amqp-report/"
+    },
+    {
+        "description": "Badsecrets usage as seen in our scans  (known or very weak cryptographic secrets)",
+        "type": "scan_badsecrets",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/badsecrets-report/"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/open-cwmp-report/",
+        "description": "This report identifies hosts that have the CPE WAN Management Protocol (CWMP) running and accessible on the Internet.",
+        "type": "scan_cwmp"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/dns-open-resolvers-report/",
+        "type": "scan_dns",
+        "description": "DNS Open Resolvers that could be used for DDoS"
+    },
+    {
+        "type": "scan_epmd",
+        "description": "This report identifies accessible Erlang Port Mapper Daemon (EPMD) servers on port 4369/tcp.",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-erlang-port-mapper-report-daemon/"
+    },
+    {
+        "description": "Vulnerable Exchange servers identified by our scans",
+        "type": "scan_exchange",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/vulnerable-exchange-server-report/"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-ftp-report/",
+        "type": "scan_ftp",
+        "description": "This report identifies hosts that have an FTP instance running on port 21/TCP that's accessible on the Internet."
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-http-report/",
+        "type": "scan_http",
+        "description": "Accessible HTTP Scan Results"
+    },
+    {
+        "type": "scan_http_proxy",
+        "description": "Open HTTP Proxy Scan Results",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/open-http-proxy-report/"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/vulnerable-http-report/",
+        "type": "scan_http_vulnerable",
+        "description": "Vulnerable HTTP Results"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-imap-report/",
+        "description": "Accessible IMAP services seen in our scans",
+        "type": "scan_imap"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/open-ldap-tcp-report/",
+        "type": "scan_ldap_tcp",
+        "description": "Open LDAP (TCP) Services Results"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/open-ldap-report/",
+        "type": "scan_ldap_udp",
+        "description": "Open LDAP Services Results"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/high-loop-dos-report/",
+        "description": "This report contains information about hosts that can be abused in a novel type of Denial- of-Service (DoS) attacks: application-layer loop DoS",
+        "type": "scan_loop_dos"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/open-memcached-report/",
+        "type": "scan_memcached",
+        "description": "Open Memcached Server Report"
+    },
+    {
+        "type": "scan_msrpc",
+        "description": "Accessible MS-RPC service as seen in Shadowserver scans",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-ms-rpc-service-report/"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/open-ms-sql-server-resolution-service-report/",
+        "type": "scan_mssql",
+        "description": "Open MS-SQL Server Resolution Service Report"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-mysql-server-report/",
+        "type": "scan_mysql",
+        "description": "This report identifies accessible MySQL server instances on port 3306/TCP.  These are instances that respond to our request with a Server Greeting."
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/open-netbios-report/",
+        "description": "This report identifies hosts that have the NetBIOS service running and accessible on the Internet.",
+        "type": "scan_netbios"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/ntp-version-report/",
+        "type": "scan_ntp",
+        "description": "This report identifies NTP servers that have the potential to be used in amplification attacks by criminals that wish to perform denial of service attacks."
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-pop3-report/",
+        "description": "Accessible POP3 services seen in our scans",
+        "type": "scan_pop3"
+    },
+    {
+        "description": "Open Portmapper Scan",
+        "type": "scan_portmapper",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/open-portmapper-report/"
+    },
+    {
+        "type": "scan_postgres",
+        "description": "This report identifies accessible PostgreSQL server instances on port 5432/TCP.",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-postgresql-server-report/"
+    },
+    {
+        "type": "scan_rdp",
+        "description": "This report identifies hosts that have Remote Desktop (RDP) Service running and are accessible to the world on the Internet.",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-rdp-report/"
+    },
+    {
+        "type": "scan_redis",
+        "description": "Open Redis Servers Report",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/open-redis-report/"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-rsync-report/",
+        "type": "scan_rsync",
+        "description": "Accessible Rsync Service Results"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-smb-report/",
+        "type": "scan_smb",
+        "description": "This report identifies hosts that have an SMB instance running on port 445/TCP that are accessible on the Internet."
+    },
+    {
+        "description": "Accessible SMTP Servers identified by our scans",
+        "type": "scan_smtp",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-smtp-report/"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/open-snmp-report/",
+        "type": "scan_snmp",
+        "description": "This report identifies hosts with SNMPv2 publicly accessible, that are responding to the community public, and that have the potential to be used in amplification attacks by criminals who wish to perform denial of service attacks."
+    },
+    {
+        "type": "scan_ssdp",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/open-ssdp-report/"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-ssh-report/",
+        "type": "scan_ssh",
+        "description": "Accessible SSH Scan Results"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-ssl-report/",
+        "type": "scan_ssl",
+        "description": "All SSL Scanned Results"
+    },
+    {
+        "description": "SSLv3/Poodle Vulnerable Servers",
+        "type": "scan_ssl_poodle",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/ssl-poodle-report/"
+    },
+    {
+        "description": "This report identifies accessible STUN (Session Traversal Utilities for NAT) servers on port 3478/UDP.",
+        "type": "scan_stun",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-stun-service-report/"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-telnet-report/",
+        "type": "scan_telnet",
+        "description": "Accessible Telnet Service Results"
+    },
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/accessible-vnc-report/",
+        "description": "This report identifies hosts that have a VNC instance running on port 5900/TCP that are accessible on the Internet.",
+        "type": "scan_vnc"
+    }
+]
+
+>>> TEST 6: Reports List for yesterday (2026-06-08) — first 5 files
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/list
+BODY     : {"date": "2026-06-08", "limit": 5, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+[
+    {
+        "timestamp": "2026-06-08",
+        "id": "X1oZXZI4Hn-wCik6SJ9fL6wpHdI?rQEZYPHy3OPfeG-HjR-23A",
+        "report": "pngdataco",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/blocklist-report/",
+        "file": "2026-06-08-blocklist-11993-png_dataco-asn.csv",
+        "type": "blocklist"
+    },
+    {
+        "report": "pngdataco",
+        "id": "BUQBOZvOPJurGLwyZ_Zc8w00AWQ?q1C_fBNPfOOHOnWlD4saZw",
+        "file": "2026-06-08-compromised_website-11993-png_dataco-asn.csv",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/compromised-website-report/",
+        "timestamp": "2026-06-08",
+        "type": "compromised_website"
+    },
+    {
+        "file": "2026-06-08-device_id-11993-png_dataco-asn.csv",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/device-identification-report/",
+        "report": "pngdataco",
+        "id": "naYzpyN6ftaYH0GkkScnv2DFPPA?N3VK_i3D52vHseO_fodanQ",
+        "timestamp": "2026-06-08",
+        "type": "device_id"
+    },
+    {
+        "timestamp": "2026-06-08",
+        "id": "s-x_mZeryg1F-jC25A89Od-Diq4?jPLcaYMMus_mYBnRS6CKNg",
+        "report": "pngdataco",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/sinkhole-events-report/",
+        "file": "2026-06-08-event4_sinkhole-11993-png_dataco-asn.csv",
+        "type": "event4_sinkhole"
+    },
+    {
+        "file": "2026-06-08-event4_sinkhole_dns-11993-png_dataco-asn.csv",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/sinkhole-dns-events-report/",
+        "id": "YbaEXGsNbl2gvudOTDzZdE3eKO0?8WKHDIyAGu91AsheOwzTvQ",
+        "report": "pngdataco",
+        "timestamp": "2026-06-08",
+        "type": "event4_sinkhole_dns"
+    }
+]
+
+>>> TEST 7: Reports List — blocklist type only
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/list
+BODY     : {"type": "blocklist", "date": "2026-06-08", "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+[
+    {
+        "report": "pngdataco",
+        "id": "X1oZXZI4Hn-wCik6SJ9fL6wpHdI?rQEZYPHy3OPfeG-HjR-23A",
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/blocklist-report/",
+        "file": "2026-06-08-blocklist-11993-png_dataco-asn.csv",
+        "timestamp": "2026-06-08",
+        "type": "blocklist"
+    }
+]
+
+>>> TEST 8: Reports List — sinkhole events
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/list
+BODY     : {"type": "event4_sinkhole", "date": "2026-06-08", "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+[
+    {
+        "url": "https://www.shadowserver.org/what-we-do/network-reporting/sinkhole-events-report/",
+        "id": "s-x_mZeryg1F-jC25A89Od-Diq4?jPLcaYMMus_mYBnRS6CKNg",
+        "report": "pngdataco",
+        "type": "event4_sinkhole",
+        "file": "2026-06-08-event4_sinkhole-11993-png_dataco-asn.csv",
+        "timestamp": "2026-06-08"
+    }
+]
+
+>>> TEST 9: Reports Query — latest scan events (limit 3)
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/query
+BODY     : {"date": "2026-06-08", "query": {"geo": "IN"}, "limit": 3, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+Expecting value: line 1 column 1 (char 0)
+
+>>> TEST 10: Reports Query — sinkhole events only
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/query
+BODY     : {"date": "2026-06-08", "query": {"geo": "IN", "type": "sinkhole"}, "limit": 3, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+Expecting value: line 1 column 1 (char 0)
+
+>>> TEST 11: Reports Query — honeypot events only
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/query
+BODY     : {"date": "2026-06-08", "query": {"geo": "IN", "type": "honeypot"}, "limit": 3, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+Expecting value: line 1 column 1 (char 0)
+
+>>> TEST 12: Reports Query — blocklist events
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/query
+BODY     : {"date": "2026-06-08", "query": {"geo": "IN", "infection": "blocklist"}, "limit": 3, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+Expecting value: line 1 column 1 (char 0)
+
+>>> TEST 13: Reports Query — RDP scan events
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/query
+BODY     : {"date": "2026-06-08", "query": {"geo": "IN", "tag": "rdp"}, "limit": 3, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+Expecting value: line 1 column 1 (char 0)
+
+>>> TEST 14: Reports Query — tag frequency facet (top threats)
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/query
+BODY     : {"date": "2026-06-08", "query": {"geo": "IN"}, "facet": "tag", "limit": 10, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+Expecting value: line 1 column 1 (char 0)
+
+>>> TEST 15: Reports Query — available query fields (help)
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/query
+BODY     : {"help": true, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+[
+    "agent",
+    "application",
+    "asn",
+    "asn_name",
+    "banner",
+    "city",
+    "cookie",
+    "county_fips",
+    "county_name",
+    "device_model",
+    "device_sector",
+    "device_type",
+    "device_vendor",
+    "device_version",
+    "domain",
+    "dst_asn",
+    "dst_asn_name",
+    "dst_city",
+    "dst_county_fips",
+    "dst_county_name",
+    "dst_geo",
+    "dst_ip",
+    "dst_isp_name",
+    "dst_latitude",
+    "dst_longitude",
+    "dst_naics",
+    "dst_port",
+    "dst_region",
+    "dst_sector",
+    "event_id",
+    "family",
+    "geo",
+    "hostname",
+    "hostname_source",
+    "infection",
+    "ip",
+    "isp_name",
+    "latitude",
+    "longitude",
+    "md5",
+    "naics",
+    "os",
+    "port",
+    "protocol",
+    "referer",
+    "region",
+    "registrar",
+    "sector",
+    "severity",
+    "sha1",
+    "sha256",
+    "sha512",
+    "sid",
+    "source",
+    "source_url",
+    "ssl_cipher",
+    "tag",
+    "text",
+    "timestamp",
+    "tld",
+    "type",
+    "version"
+]
+
+>>> TEST 16: Reports Stats — last 3 days
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/stats
+BODY     : {"date": "-3:now", "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+[
+    [
+        "date",
+        "type",
+        "events"
+    ],
+    [
+        "2026-06-06",
+        "blocklist",
+        4
+    ],
+    [
+        "2026-06-06",
+        "compromised_website",
+        7
+    ],
+    [
+        "2026-06-06",
+        "device_id",
+        530
+    ],
+    [
+        "2026-06-06",
+        "event4_sinkhole",
+        3
+    ],
+    [
+        "2026-06-06",
+        "event4_sinkhole_dns",
+        78
+    ],
+    [
+        "2026-06-06",
+        "event4_sinkhole_http",
+        24
+    ],
+    [
+        "2026-06-06",
+        "population_isakmp",
+        76
+    ],
+    [
+        "2026-06-06",
+        "population_msmq",
+        1
+    ],
+    [
+        "2026-06-06",
+        "scan_amqp",
+        2
+    ],
+    [
+        "2026-06-06",
+        "scan_badsecrets",
+        2
+    ],
+    [
+        "2026-06-06",
+        "scan_cwmp",
+        2
+    ],
+    [
+        "2026-06-06",
+        "scan_dns",
+        28
+    ],
+    [
+        "2026-06-06",
+        "scan_epmd",
+        3
+    ],
+    [
+        "2026-06-06",
+        "scan_exchange",
+        5
+    ],
+    [
+        "2026-06-06",
+        "scan_ftp",
+        42
+    ],
+    [
+        "2026-06-06",
+        "scan_http",
+        316
+    ],
+    [
+        "2026-06-06",
+        "scan_http_vulnerable",
+        24
+    ],
+    [
+        "2026-06-06",
+        "scan_imap",
+        33
+    ],
+    [
+        "2026-06-06",
+        "scan_ldap_tcp",
+        1
+    ],
+    [
+        "2026-06-06",
+        "scan_ldap_udp",
+        1
+    ],
+    [
+        "2026-06-06",
+        "scan_loop_dos",
+        4
+    ],
+    [
+        "2026-06-06",
+        "scan_memcached",
+        1
+    ],
+    [
+        "2026-06-06",
+        "scan_msrpc",
+        25
+    ],
+    [
+        "2026-06-06",
+        "scan_mssql",
+        1
+    ],
+    [
+        "2026-06-06",
+        "scan_mysql",
+        1
+    ],
+    [
+        "2026-06-06",
+        "scan_netbios",
+        2
+    ],
+    [
+        "2026-06-06",
+        "scan_ntp",
+        28
+    ],
+    [
+        "2026-06-06",
+        "scan_pop3",
+        28
+    ],
+    [
+        "2026-06-06",
+        "scan_portmapper",
+        7
+    ],
+    [
+        "2026-06-06",
+        "scan_postgres",
+        8
+    ],
+    [
+        "2026-06-06",
+        "scan_rdp",
+        21
+    ],
+    [
+        "2026-06-06",
+        "scan_redis",
+        1
+    ],
+    [
+        "2026-06-06",
+        "scan_rsync",
+        1
+    ],
+    [
+        "2026-06-06",
+        "scan_smb",
+        11
+    ],
+    [
+        "2026-06-06",
+        "scan_smtp",
+        14
+    ],
+    [
+        "2026-06-06",
+        "scan_snmp",
+        43
+    ],
+    [
+        "2026-06-06",
+        "scan_ssh",
+        163
+    ],
+    [
+        "2026-06-06",
+        "scan_ssl",
+        430
+    ],
+    [
+        "2026-06-06",
+        "scan_ssl_poodle",
+        7
+    ],
+    [
+        "2026-06-06",
+        "scan_stun",
+        3
+    ],
+    [
+        "2026-06-06",
+        "scan_telnet",
+        28
+    ],
+    [
+        "2026-06-06",
+        "scan_vnc",
+        2
+    ],
+    [
+        "2026-06-07",
+        "blocklist",
+        3
+    ],
+    [
+        "2026-06-07",
+        "compromised_website",
+        7
+    ],
+    [
+        "2026-06-07",
+        "device_id",
+        545
+    ],
+    [
+        "2026-06-07",
+        "event4_sinkhole_dns",
+        98
+    ],
+    [
+        "2026-06-07",
+        "event4_sinkhole_http",
+        18
+    ],
+    [
+        "2026-06-07",
+        "population_isakmp",
+        72
+    ],
+    [
+        "2026-06-07",
+        "population_msmq",
+        1
+    ],
+    [
+        "2026-06-07",
+        "scan_amqp",
+        2
+    ],
+    [
+        "2026-06-07",
+        "scan_badsecrets",
+        2
+    ],
+    [
+        "2026-06-07",
+        "scan_cwmp",
+        2
+    ],
+    [
+        "2026-06-07",
+        "scan_dns",
+        27
+    ],
+    [
+        "2026-06-07",
+        "scan_epmd",
+        2
+    ],
+    [
+        "2026-06-07",
+        "scan_exchange",
+        4
+    ],
+    [
+        "2026-06-07",
+        "scan_ftp",
+        43
+    ],
+    [
+        "2026-06-07",
+        "scan_http",
+        317
+    ],
+    [
+        "2026-06-07",
+        "scan_http_vulnerable",
+        24
+    ],
+    [
+        "2026-06-07",
+        "scan_imap",
+        33
+    ],
+    [
+        "2026-06-07",
+        "scan_ldap_tcp",
+        1
+    ],
+    [
+        "2026-06-07",
+        "scan_ldap_udp",
+        1
+    ],
+    [
+        "2026-06-07",
+        "scan_loop_dos",
+        4
+    ],
+    [
+        "2026-06-07",
+        "scan_memcached",
+        1
+    ],
+    [
+        "2026-06-07",
+        "scan_msrpc",
+        27
+    ],
+    [
+        "2026-06-07",
+        "scan_mssql",
+        1
+    ],
+    [
+        "2026-06-07",
+        "scan_mysql",
+        1
+    ],
+    [
+        "2026-06-07",
+        "scan_netbios",
+        2
+    ],
+    [
+        "2026-06-07",
+        "scan_ntp",
+        27
+    ],
+    [
+        "2026-06-07",
+        "scan_pop3",
+        29
+    ],
+    [
+        "2026-06-07",
+        "scan_portmapper",
+        7
+    ],
+    [
+        "2026-06-07",
+        "scan_postgres",
+        7
+    ],
+    [
+        "2026-06-07",
+        "scan_rdp",
+        20
+    ],
+    [
+        "2026-06-07",
+        "scan_redis",
+        1
+    ],
+    [
+        "2026-06-07",
+        "scan_rsync",
+        1
+    ],
+    [
+        "2026-06-07",
+        "scan_smb",
+        12
+    ],
+    [
+        "2026-06-07",
+        "scan_smtp",
+        14
+    ],
+    [
+        "2026-06-07",
+        "scan_snmp",
+        42
+    ],
+    [
+        "2026-06-07",
+        "scan_ssdp",
+        1
+    ],
+    [
+        "2026-06-07",
+        "scan_ssh",
+        156
+    ],
+    [
+        "2026-06-07",
+        "scan_ssl",
+        446
+    ],
+    [
+        "2026-06-07",
+        "scan_ssl_poodle",
+        7
+    ],
+    [
+        "2026-06-07",
+        "scan_stun",
+        3
+    ],
+    [
+        "2026-06-07",
+        "scan_telnet",
+        26
+    ],
+    [
+        "2026-06-07",
+        "scan_vnc",
+        2
+    ],
+    [
+        "2026-06-08",
+        "blocklist",
+        4
+    ],
+    [
+        "2026-06-08",
+        "compromised_website",
+        6
+    ],
+    [
+        "2026-06-08",
+        "device_id",
+        534
+    ],
+    [
+        "2026-06-08",
+        "event4_sinkhole",
+        21
+    ],
+    [
+        "2026-06-08",
+        "event4_sinkhole_dns",
+        85
+    ],
+    [
+        "2026-06-08",
+        "event4_sinkhole_http",
+        24
+    ],
+    [
+        "2026-06-08",
+        "population_http_proxy",
+        1
+    ],
+    [
+        "2026-06-08",
+        "population_isakmp",
+        82
+    ],
+    [
+        "2026-06-08",
+        "population_msmq",
+        1
+    ],
+    [
+        "2026-06-08",
+        "scan_amqp",
+        2
+    ],
+    [
+        "2026-06-08",
+        "scan_badsecrets",
+        2
+    ],
+    [
+        "2026-06-08",
+        "scan_cwmp",
+        2
+    ],
+    [
+        "2026-06-08",
+        "scan_dns",
+        25
+    ],
+    [
+        "2026-06-08",
+        "scan_epmd",
+        3
+    ],
+    [
+        "2026-06-08",
+        "scan_exchange",
+        3
+    ],
+    [
+        "2026-06-08",
+        "scan_ftp",
+        42
+    ],
+    [
+        "2026-06-08",
+        "scan_http",
+        329
+    ],
+    [
+        "2026-06-08",
+        "scan_http_proxy",
+        1
+    ],
+    [
+        "2026-06-08",
+        "scan_http_vulnerable",
+        24
+    ],
+    [
+        "2026-06-08",
+        "scan_imap",
+        33
+    ],
+    [
+        "2026-06-08",
+        "scan_ldap_tcp",
+        1
+    ],
+    [
+        "2026-06-08",
+        "scan_loop_dos",
+        3
+    ],
+    [
+        "2026-06-08",
+        "scan_memcached",
+        1
+    ],
+    [
+        "2026-06-08",
+        "scan_msrpc",
+        26
+    ],
+    [
+        "2026-06-08",
+        "scan_mssql",
+        1
+    ],
+    [
+        "2026-06-08",
+        "scan_mysql",
+        1
+    ],
+    [
+        "2026-06-08",
+        "scan_netbios",
+        2
+    ],
+    [
+        "2026-06-08",
+        "scan_ntp",
+        27
+    ],
+    [
+        "2026-06-08",
+        "scan_pop3",
+        27
+    ],
+    [
+        "2026-06-08",
+        "scan_portmapper",
+        7
+    ],
+    [
+        "2026-06-08",
+        "scan_postgres",
+        7
+    ],
+    [
+        "2026-06-08",
+        "scan_rdp",
+        20
+    ],
+    [
+        "2026-06-08",
+        "scan_redis",
+        1
+    ],
+    [
+        "2026-06-08",
+        "scan_rsync",
+        1
+    ],
+    [
+        "2026-06-08",
+        "scan_smb",
+        11
+    ],
+    [
+        "2026-06-08",
+        "scan_smtp",
+        14
+    ],
+    [
+        "2026-06-08",
+        "scan_snmp",
+        27
+    ],
+    [
+        "2026-06-08",
+        "scan_ssdp",
+        1
+    ],
+    [
+        "2026-06-08",
+        "scan_ssh",
+        160
+    ],
+    [
+        "2026-06-08",
+        "scan_ssl",
+        448
+    ],
+    [
+        "2026-06-08",
+        "scan_ssl_poodle",
+        7
+    ],
+    [
+        "2026-06-08",
+        "scan_stun",
+        3
+    ],
+    [
+        "2026-06-08",
+        "scan_telnet",
+        29
+    ],
+    [
+        "2026-06-08",
+        "scan_vnc",
+        2
+    ]
+]
+
+>>> TEST 17: Reports Stats — sinkhole last 7 days
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/reports/stats
+BODY     : {"type": "event4_sinkhole", "date": "-7:now", "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+[
+    [
+        "date",
+        "type",
+        "events"
+    ],
+    [
+        "2026-06-02",
+        "event4_sinkhole",
+        32
+    ],
+    [
+        "2026-06-03",
+        "event4_sinkhole",
+        14
+    ],
+    [
+        "2026-06-04",
+        "event4_sinkhole",
+        5
+    ],
+    [
+        "2026-06-05",
+        "event4_sinkhole",
+        7
+    ],
+    [
+        "2026-06-06",
+        "event4_sinkhole",
+        3
+    ],
+    [
+        "2026-06-08",
+        "event4_sinkhole",
+        21
+    ]
+]
+
+>>> TEST 18: Malware Query — lookup by MD5 hash (sample)
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/malware/query
+BODY     : {"md5": "ae3b6578d90c1c7d97e39b0c08180d17", "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+{
+    "error": "Group access denied"
+}
+
+>>> TEST 19: Malware Query — help (available fields)
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/malware/query
+BODY     : {"help": true, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+{
+    "error": "Group access denied"
+}
+
+>>> TEST 20: Honeypot Query — help (available fields)
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/honeypot/query
+BODY     : {"help": true, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+{
+    "error": "Group access denied"
+}
+
+>>> TEST 21: Honeypot Query — brute force events for your geo
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/honeypot/query
+BODY     : {"date": "2026-06-08", "query": {"geo": "IN", "type": "brute_force"}, "limit": 3, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+{
+    "error": "Group access denied"
+}
+
+>>> TEST 22: ASN Info — lookup AS13335 (Cloudflare as a sample)
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/asn/info
+BODY     : {"asn": 13335, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+Expecting value: line 1 column 1 (char 0)
+
+>>> TEST 23: ASN Prefix — get prefixes for AS13335
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/asn/prefix
+BODY     : {"asn": 13335, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+Expecting value: line 1 column 1 (char 0)
+
+>>> TEST 24: Network Info — lookup an IP prefix
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/network/info
+BODY     : {"ip": "1.1.1.0/24", "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+Expecting value: line 1 column 1 (char 0)
+
+>>> TEST 25: Scan Query — help (available fields)
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/scan/query
+BODY     : {"help": true, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+Expecting value: line 1 column 1 (char 0)
+
+>>> TEST 26: Scan Query — open RDP (port 3389) sample
+
+======================================================================
+ENDPOINT : https://transform.shadowserver.org/api2/scan/query
+BODY     : {"query": {"port": 3389, "geo": "IN"}, "limit": 3, "apikey": "3b8741b3-2cd7-4215-9c5e-ab43611bed0e"}
+======================================================================
+Expecting value: line 1 column 1 (char 0)
+
+
+======================================================================
+All tests complete. Check output above for non-empty responses.
+Endpoints with data → configure as DNIF webhooks.
+======================================================================
